@@ -1,0 +1,641 @@
+{% extends 'adm/layout.html.twig' %}
+
+{% block content %}
+<div class="content-wrapper" id="vue-master">
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h4 class="m-0 text-dark">Dashboard</h4>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">{{ content_title }}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.content-header -->
+
+	<div class="container-fluid">
+		
+    <div class="row">
+      
+      <!-- Peserta -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_trainees') }}">
+          <div class="info-box bg-info">
+            <span class="info-box-icon"><i class="fas fa-user-astronaut"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Peserta</span>
+              <span class="info-box-number">{{ trainee_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ trainee_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ trainee_total_new }} Peserta baru
+              </span>
+            </div>
+            
+          </div>
+        </a>
+      </div>
+      <!-- Peserta -->
+
+      <!-- Perusahaan -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_companies') }}">
+          <div class="info-box bg-palm">
+            <span class="info-box-icon"><i class="far fa-building"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Perusahaan</span>
+              <span class="info-box-number">{{ company_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ company_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ company_total_new }} Client baru
+              </span>
+            </div>
+            
+          </div>
+        </a>
+      </div>
+      <!-- Perusahaan -->
+
+      <!-- Program -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_batches') }}">
+          <div class="info-box bg-wildwatermelon">
+            <span class="info-box-icon"><i class="fas fa-network-wired"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Program</span>
+              <span class="info-box-number">{{ program_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ program_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ program_total_new }} Program Baru
+              </span>
+            </div>
+            
+          </div>
+        </a>
+      </div>
+      <!-- Program -->
+
+      <!-- Batch -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_batches') }}">
+          <div class="info-box bg-oranges">
+            <span class="info-box-icon"><i class="fas fa-campground"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Batch</span>
+              <span class="info-box-number">{{ batch_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ batch_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ batch_total_new }} Batch Baru
+              </span>
+            </div>
+            
+          </div>
+        </a>
+      </div>
+      <!-- Batch -->
+
+      <!-- Public -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_batches') }}">
+          <div class="info-box bg-pastelred">
+            <span class="info-box-icon"><i class="fas fa-random"></i></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Public</span>
+              <span class="info-box-number">{{ public_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ public_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ public_total_new }} Program Baru
+              </span>
+            </div>
+
+          </div>
+        </a>
+      </div>
+      <!-- Public -->
+
+      <!-- Inhouse -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_batches') }}">
+          <div class="info-box bg-cassandrayellow">
+            <span class="info-box-icon"><i class="fas fa-compress-arrows-alt"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Inhouse</span>
+              <span class="info-box-number">{{ inhouse_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ inhouse_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ inhouse_total_new }} Program Baru
+              </span>
+            </div>
+
+          </div>
+        </a>
+      </div>
+      <!-- Inhouse -->
+
+      <!-- Lulus -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_graduations') }}">
+          <div class="info-box bg-wildgreen">
+            <span class="info-box-icon"><i class="fas fa-medal"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Lulus</span>
+              <span class="info-box-number">{{ graduated_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ graduated_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ graduated_total_new }} Peserta
+              </span>
+            </div>
+
+          </div>
+        </a>
+      </div>
+      <!-- Lulus -->
+
+      <!-- Belum Lulus -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <a href="{{ site_url('adm/rep_graduations') }}">
+          <div class="info-box bg-gradient-info">
+            <span class="info-box-icon"><i class="fas fa-fist-raised"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Belum Lulus</span>
+              <span class="info-box-number">{{ ungraduated_total }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" {{ ungraduated_percentage }}></div>
+              </div>
+              <span class="progress-description">
+                {{ ungraduated_total_new }} Peserta
+              </span>
+            </div>
+
+          </div>
+        </a>
+      </div>
+      <!-- Belum Lulus -->
+		  
+    </div>
+    
+    <div class="row">
+
+      <!-- Left col -->
+      <section class="col-lg-7 connectedSortable">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-trophy mr-1 mt-2"></i>
+              Top Client
+            </h3>
+            <div class="card-tools">
+              <ul class="nav nav-pills ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#chart1" data-toggle="tab">Bar</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#chart2" data-toggle="tab">Donut</a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content p-0">
+              <div class="chart tab-pane active" id="chart1">
+                <canvas id="barChart"
+                  style="height: 350px;"></canvas>
+              </div>
+              <div class="chart tab-pane" id="chart2">
+                <canvas id="pieChart"
+                  style="height: 350px;"></canvas>
+              </div>
+            </div>
+          </div><!-- /.card-body -->
+        </div>
+
+        <div class="card">
+        	<div class="card-header">
+        		<h3 class="card-title">
+        			<i class="fas fa-calendar mr-1 mt-2"></i>
+        			Laporan Tahunan
+        		</h3>
+        		<!-- <div class="card-tools">
+        		</div> -->
+        	</div><!-- /.card-header -->
+        	<div class="card-body">
+              <label>Jumlah Peserta</label>
+              <canvas id="traineeChart" style="width: 100%;"></canvas>
+              <div style="padding-top: 10%;"></div>
+              <label>Jumlah Program</label>
+              <canvas id="programChart" style="width: 100%;"></canvas>
+        	</div><!-- /.card-body -->
+        </div>
+      </section>
+      <!-- /.Left col -->
+
+      <!-- right col (We are only adding the ID to make the widgets sortable)-->
+      <section class="col-lg-5 connectedSortable">
+
+        <div class="card">
+          <div class="card-header border-0">
+            <h3 class="card-title">
+              <i class="fas fa-network-wired mr-1 mt-2"></i>
+              Program Berjalan
+            </h3>
+            <!-- card tools -->
+            <div class="card-tools">
+              <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <div class="card-body">
+            <div style="height: 270px; width: 100%;">
+              
+              {% if ongoing_program %}
+              {% for laporan in ongoing_program %}
+              {% set no = no + 1 %}
+              <a href="{{ laporan.link }}" class="d-block">
+              <div class="info-box {{ laporan.bgcolor }}">
+                <span class="info-box-icon text-white"><i class="fas {{ laporan.icon }}"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-number text-white">{{ laporan.name }} ({{ laporan.batch }})</span>
+                  <span class="info-box-text text-white">{{ indonesian_date(laporan.start_date) }}  -  {{ indonesian_date(laporan.end_date) }}</span>
+                </div>
+
+              </div>
+              </a>
+              {% endfor %}
+              {% else %}
+                Tidak ada data
+              {% endif %}
+            
+            </div>
+          </div>
+          <div class="card-footer bg-transparent">
+            <div class="row">
+              <div class="col-12">
+                <a href="{{ site_url('adm/rep_batches') }}" style="color: black;">
+                  <div class="text-black float-right">Selengkapnya</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bg-fuel">
+          <div class="card-header border-0">
+            <h3 class="card-title">
+              <i class="fas fa-random mr-1 mt-2"></i>
+              Program Public Selanjutnya
+            </h3>
+            <!-- card tools -->
+            <div class="card-tools">
+              <button type="button" class="btn btn-sm text-white" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <div class="card-body">
+            <div style="height: 270px; width: 100%;">
+
+              {% if next_public_program %}
+              {% for laporan in next_public_program %}
+              {% set no = no + 1 %}
+              <div class="info-box bg-pastelred">
+              	<span class="info-box-icon"><i class="fas {{ laporan.icon }}"></i></span>
+
+              	<div class="info-box-content">
+              		<span class="info-box-number">{{ laporan.name }} ({{ laporan.batch }})</span>
+              		<span class="info-box-text">{{ indonesian_date(laporan.start_date) }} -
+              			{{ indonesian_date(laporan.end_date) }}</span>
+              	</div>
+
+              </div>
+              {% endfor %}
+              {% else %}
+              Tidak ada data
+              {% endif %}
+
+            </div>
+          </div>
+          <div class="card-footer bg-transparent">
+            <div class="row">
+              <div class="col-12">
+                <a href="{{ site_url('adm/rep_batches') }}" style="color: white;">
+                	<div class="text-black float-right">Selengkapnya</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bg-fuel">
+          <div class="card-header border-0">
+            <h3 class="card-title">
+              <i class="fas fa-compress-arrows-alt mr-1 mt-2"></i>
+              Program Inhouse Selanjutnya
+            </h3>
+            <!-- card tools -->
+            <div class="card-tools">
+              <button type="button" class="btn btn-sm text-white" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <div class="card-body">
+            <div style="height: 270px; width: 100%;">
+
+              {% if next_inhouse_program %}
+              {% for laporan in next_inhouse_program %}
+              {% set no = no + 1 %}
+              <div class="info-box bg-cassandrayellow">
+              	<span class="info-box-icon"><i class="fas {{ laporan.icon }}"></i></span>
+
+              	<div class="info-box-content">
+              		<span class="info-box-number">{{ laporan.name }} ({{ laporan.batch }})</span>
+              		<span class="info-box-text">{{ indonesian_date(laporan.start_date) }} -
+              			{{ indonesian_date(laporan.end_date) }}</span>
+              	</div>
+
+              </div>
+              {% endfor %}
+              {% else %}
+              Tidak ada data
+              {% endif %}
+
+            </div>
+          </div>
+          <div class="card-footer bg-transparent">
+            <div class="row">
+              <div class="col-12">
+                <a href="{{ site_url('adm/rep_batches') }}" style="color: white;">
+                	<div class="text-black float-right">Selengkapnya</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </section>
+      <!-- right col -->
+    
+    </div>
+  
+  </div>
+
+</div>
+
+{% endblock  %}
+
+{% block add_javascript %}
+	{{ parent() }}
+
+	<script>
+
+    var barCtx = document.getElementById('barChart').getContext('2d');
+    var pieCtx = document.getElementById('pieChart').getContext('2d');
+    var programCtx = document.getElementById('programChart').getContext('2d');
+    var traineeCtx = document.getElementById('traineeChart').getContext('2d');
+    var cData = JSON.parse('{{ chart_data }}');
+
+    var barChart = new Chart(barCtx, {
+    type: 'bar',
+    scaleOverride : true,
+    scaleSteps : 10,
+    scaleStepWidth : 50,
+    scaleStartValue : 0,
+    data: {
+        labels: cData.label,
+        
+        datasets: [{
+            label: 'Jumlah Peserta',
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+            ],
+            data: cData.data,
+            borderWidth: 1,
+        }]
+      },
+      options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                hover: {
+                    mode: 'label'
+                },
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            stacked: true,
+                            // ticks: {
+                                // beginAtZero: true,
+                                // steps: 10,
+                                // stepValue: 10,
+                                // max: 50
+                            // }
+                        }]
+                },
+            }
+    });
+    var pieChart = new Chart(pieCtx, {
+    type: 'doughnut',
+    data: {
+        labels: cData.label,
+        
+        datasets: [{
+            label: 'Jumlah Peserta',
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+            ],
+            data: cData.data,
+            borderWidth: 1
+        }]
+      },
+      options: {
+                responsive: true,
+                legend: {
+                  position: 'bottom',
+                }
+            }
+      // options: chartOptions
+    });
+    
+    var programChart = new Chart(programCtx, {
+    type: 'bar',
+    scaleOverride : true,
+    scaleSteps : 10,
+    scaleStepWidth : 50,
+    scaleStartValue : 0,
+    data: {
+        labels: [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+        ],
+        
+        datasets: [
+          {
+            label: 'Public',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            data: cData.data_public
+          },
+          {
+            label: 'Inhouse',
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+            data: cData.data_inhouse
+          },
+        ]
+      },
+      options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                hover: {
+                    mode: 'label'
+                },
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            // stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                                // steps: 10,
+                                // stepValue: 10,
+                                // max: 50
+                            }
+                        }]
+                },
+            }
+    });
+
+    var traineeChart = new Chart(traineeCtx, {
+    type: 'line',
+    scaleOverride : true,
+    scaleSteps : 10,
+    scaleStepWidth : 50,
+    scaleStartValue : 0,
+    data: {
+        labels: [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+        ],
+        
+        datasets: [
+          {
+            label: 'Peserta',
+            backgroundColor: 'transparent',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            data: cData.data_trainee
+          }
+        ]
+      },
+      options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                hover: {
+                    mode: 'label'
+                },
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            // stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                                // steps: 10,
+                                // stepValue: 10,
+                                // max: 50
+                            }
+                        }]
+                },
+            }
+    });
+  </script>
+{% endblock  %}

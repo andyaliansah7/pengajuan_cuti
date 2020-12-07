@@ -1,0 +1,117 @@
+{% extends 'adm/layout.html.twig' %}
+
+{% block content %}
+
+<div class="content-wrapper">
+
+	<form method="post" action="{{ site_url('adm/trainees/print_data') }}">
+
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h4>{{ content_title }}</h4>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">Home</li>
+						<li class="breadcrumb-item">Master</li>
+						<li class="breadcrumb-item"><a href="#">Peserta</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+
+					<div class="card card-default">
+						<div class="card-header">
+							<h3 class="card-title">Filter</h3>
+						</div>
+						<div class="card-body">
+							
+							<table width="100%">
+								<tr>
+									<td>Nama Peserta</td>
+									<td>
+										<input type="text" class="form-control" name="name" tabindex="1" style="width:100%">
+									</td>
+								</tr>
+								<tr>
+									<td class="p-t-2">Jenis Kelamin</td>
+									<td class="p-t-2">
+										<select class="form-control select2" name="gender" tabindex="2" style="width:100%">
+											<option value="">- Pilih -</option>
+											{% if gender_data %}
+											{% for gender_row in gender_data %}
+											<option value="{{ gender_row.gender_id }}">{{ gender_row.gender_name }}</option>
+											{% endfor %}
+											{% endif %}
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="p-t-2">Jabatan</td>
+									<td class="p-t-2">
+										<select class="form-control select2" name="job_title" tabindex="3" style="width:100%">
+											<option value="">- Pilih -</option>
+											{% if job_title_data %}
+											{% for job_title_row in job_title_data %}
+											<option value="{{ job_title_row.job_title_id }}">{{ job_title_row.job_title_name }}</option>
+											{% endfor %}
+											{% endif %}
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="p-t-2">Perusahaan</td>
+									<td class="p-t-2">
+										<select class="form-control form-control-sm select2" name="company" tabindex="4"  style="width:100%">
+											<option value="">- Pilih -</option>
+											{% if company_data %}
+											{% for company_row in company_data %}
+											<option value="{{ company_row.company_id }}">{{ company_row.company_name }}</option>
+											{% endfor %}
+											{% endif %}
+										</select>
+									</td>
+								</tr>
+							</table>
+				
+						</div>
+						<div class="card-footer">
+
+							<button type="submit" class="btn btn-info float-right" style="width: 25%;">
+								Proses
+							</button>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+			<!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+
+	</form>
+</div>
+
+
+{% endblock  %}
+
+{% block add_javascript %}
+{{ parent() }}
+
+<script type="text/javascript">
+	window.INPUT.handleSelect2();
+</script>
+{% endblock  %}
