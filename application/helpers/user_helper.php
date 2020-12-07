@@ -10,12 +10,15 @@ function logged_user($show)
 {
 	$ci =& get_instance();
 
-	$ci->load->model('Users_model');
+	$ci->load->model('Karyawan_model');
 
-	$user_id = $ci->session->userdata('user_id');
+	$id = $ci->session->userdata('id');
+	
+	$where = array(
+		"karyawan_id"      => $id
+	);
 
-	// cek ke server berdasarkan session user id
-	$check_user = $ci->Users_model->get_data_advance($user_id)->row_array();
+	$check_user = $ci->Karyawan_model->get_data_karyawan($where)->row_array();
 
 	// ketika user tersedia
 	// maka check kembali array exists
@@ -34,15 +37,20 @@ function logged_user($show)
 	return '';
 }
 
-function check_roles($role_name)
+function check_roles($hak_akses_id)
 {
 	$ci =& get_instance();
 
-	$ci->load->model('Users_model');
+	$ci->load->model('Karyawan_model');
 
-	$user_id 	= $ci->session->userdata('user_id');
+	$id = $ci->session->userdata('id');
 
-	$check_user = $ci->Users_model->get_data_advance($user_id, "", "", $role_name)->row_array();
+	$where = array(
+		"karyawan_id"      => $id,
+		"a.hak_akses_id"   => $hak_akses_id
+	);
+	
+	$check_user = $ci->Karyawan_model->get_data_karyawan($where)->row_array();
 
 	return $check_user;
 }

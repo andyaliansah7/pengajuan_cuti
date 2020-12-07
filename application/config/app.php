@@ -2,9 +2,9 @@
 /**
  * Konfigurasi Tambahan
  *
- *  @author Hikmahtiar <hikmahtiar.cool@gmail.com>
+ *  @author Andy Aliansah <andyaliansah97@gmail.com>
  */
-$app_name = 'Loop - Indonesia';
+$app_name = 'UNPAM - Indonesia';
 $year = '2020';
 
 // jika tahun melebih tahun dibuatnya aplikasi 

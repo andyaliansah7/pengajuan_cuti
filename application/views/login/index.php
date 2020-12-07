@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Loop | Log in</title>
+  <title>UNPAM | Login</title>
   <!-- Tell the browser to be responsive to screen width -->
   <!-- <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/images/logo/loop-logo-blue-ic.png') ?>"/> -->
 
@@ -25,17 +25,17 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>Loop</b> Indonesia
+    <b>UNPAM</b> Login
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Masuk untuk memulai sesi anda</p>
 
-      <form method="post" action="<?php echo site_url('loginweb/loginprocess'); ?>" >
+      <form method="post" action="<?php echo site_url('loginweb/proses_login'); ?>" >
 
         <div class="input-group mb-3">
-          <input type="text" name="username" class="form-control" placeholder="Nama pengguna" required="required">
+          <input type="email" name="email" class="form-control" placeholder="Email" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Kata sandi" required="required">
+          <input type="password" name="kata_sandi" class="form-control" placeholder="Kata Sandi" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -78,7 +78,7 @@
 
 <?php if($this->session->flashdata('error_login')):?>
   <script type="text/javascript">
-      toastr.error('Nama Pengguna atau Sandi Salah, Silahkan coba lagi.');
+      toastr.error('Email atau Kata Sandi Salah, Silahkan coba lagi.');
   </script>
 <?php endif; ?>
 

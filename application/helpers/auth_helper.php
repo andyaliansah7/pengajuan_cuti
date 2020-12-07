@@ -11,7 +11,7 @@ if(!function_exists('is_logged'))
     function is_logged()
     {
         $ci =& get_instance();
-        return $ci->session->userdata('user_id');
+        return $ci->session->userdata('id');
     }
 }
 ?>

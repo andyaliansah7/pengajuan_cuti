@@ -12,7 +12,7 @@ class Loginweb extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('Users_model');
+		$this->load->model('Karyawan_model');
 	}
 
 	/**
@@ -20,33 +20,34 @@ class Loginweb extends CI_Controller
 	 */
 	public function index()
 	{
-		//redirect('adm/dashboard');
-
 		$this->load->view('login/index');
 	}
 
 	/**
 	 * Proses Login
 	 */
-	public function loginprocess()
+	public function proses_login()
 	{
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+		$email      = $this->input->post('email');
+		$kata_sandi = $this->input->post('kata_sandi');
 
-		$login = $this->Users_model->get_data_advance('', $username, $password)->row();
+		$where = array(
+			"email"      => $email,
+			"kata_sandi" => md5($kata_sandi)
+		);
+		
+		$login = $this->Karyawan_model->get_data_karyawan($where)->row();
 
-		// echo json_encode($login);
-		// die();
 		if ($login)
 		{
 			$session = array(
-				'user_id' => $login->id,
-				'role'    => $login->role
+				'id'        => $login->karyawan_id,
+				'hak_akses' => $login->hak_akses
 			);
 
 			$this->session->set_userdata($session);
 
-			// print_r($session);
+			// echo json_encode($session);
 			redirect('adm/dashboard');
 		}
 		else

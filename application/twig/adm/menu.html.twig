@@ -1,7 +1,7 @@
 <!-- Brand Logo -->
-  		<a href="https://www.loop-indonesia.com/" class="brand-link">
-  			<img src="{{ base_url('assets/images/logo/loop-logo-blue-ic.png') }}" class="brand-image" style="opacity: .8; margin-left: 6.5%;">
-  			<span class="brand-text">Loop Indonesia</span>
+  		<a href="#" class="brand-link">
+  			<img src="{{ base_url('assets/images/logo/unpam-logo.png') }}" class="brand-image" style="opacity: .8; margin-left: 6.5%;">
+  			<span class="brand-text text-bold">UNPAM</span>
   		</a>
 
   		<!-- Sidebar -->
@@ -13,7 +13,7 @@
   				</div>
   				<div class="info">
   					<!-- <a href="#" class="d-block"> -->
-						{% if(logged_user('fullname') != "") %} {{ logged_user('fullname') }} {% endif %}
+						{% if(logged_user('nama_lengkap') != "") %} {{ logged_user('nama_lengkap') }} {% endif %}
 					<!-- </a> -->
   				</div>
   			</div>
@@ -30,7 +30,7 @@
 					</a>
 					</li>
 
-					{% if check_roles('1') or check_roles('2') or check_roles('3') %}
+					{% if check_roles('1') %}
   					<li class="nav-item has-treeview {{ menu_open_master() }}">
   						<a href="#" class="nav-link {{ active_link_master() }}">
   							<i class="nav-icon far fa-folder-open"></i>
@@ -40,127 +40,16 @@
   							</p>
   						</a>
   						<ul class="nav nav-treeview">
-							{% if check_roles('1') or check_roles('2') or check_roles('3') %}
   							<li class="nav-item">
-  								<a href="{{ site_url('adm/trainees') }}" class="nav-link {{ active_link('trainees') }}">
+  								<a href="{{ site_url('adm/karyawan') }}" class="nav-link {{ active_link('karyawan') }}">
   									<i class="far fa-circle nav-icon"></i>
-  									<p>Peserta</p>
+  									<p>Karyawan</p>
   								</a>
 							</li>
-							{% endif %}
-							{% if check_roles('1') or check_roles('2') %}
-  							<li class="nav-item">
-  								<a href="{{ site_url('adm/companies') }}" class="nav-link {{ active_link('companies') }}">
-  									<i class="far fa-circle nav-icon"></i>
-  									<p>Perusahaan</p>
-  								</a>
-							</li>
-							{% endif %}
-  							<!-- <li class="nav-item">
-								<a href="{{ site_url('adm/job_titles') }}" class="nav-link {{ active_link('job_titles') }}">
-									<i class="far fa-circle nav-icon"></i>
-									<p>Jabatan</p>
-								</a>
-							</li> -->
-							{% if check_roles('1') %}
-							<li class="nav-item">
-								<a href="{{ site_url('adm/requirements') }}" class="nav-link {{ active_link('requirements') }}">
-									<i class="far fa-circle nav-icon"></i>
-									<p>Persyaratan</p>
-								</a>
-							</li>
-							{% endif %}
   						</ul>
 					</li>
 					{% endif %}
-					{% if check_roles('1') %}
-					<li class="nav-item">
-					<a href="{{ site_url('adm/programs') }}" class="nav-link {{ active_link('programs') }}">
-						<i class="nav-icon far fa-circle"></i>
-						<p>
-							Program
-						</p>
-					</a>
-					</li>
-					{% endif %}
-					{% if check_roles('1') or check_roles('2') %}
-					<li class="nav-item">
-					<a href="{{ site_url('adm/batches') }}" class="nav-link {{ active_link('batches') }}">
-						<i class="nav-icon far fa-circle"></i>
-						<p>
-							Batch
-						</p>
-					</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ site_url('adm/grad_requirements') }}" class="nav-link {{ active_link('grad_requirements') }}">
-							<i class="nav-icon far fa-circle"></i>
-							<p>
-								Syarat Kelulusan
-							</p>
-						</a>
-					</li>
-					{% endif %}
-
-					{% if check_roles('1') or check_roles('3') %}
-					<li class="nav-header">Laporan</li>
-					<li class="nav-item">
-						<a href="{{ site_url('adm/rep_trainees') }}" class="nav-link {{ active_link('rep_trainees') }}">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Peserta</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ site_url('adm/rep_companies') }}" class="nav-link {{ active_link('rep_companies') }}">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Perusahaan</p>
-						</a>
-					</li>
-					<!-- <li class="nav-item">
-						<a href="{{ site_url('adm/programs/report') }}" class="nav-link">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Program</p>
-						</a>
-					</li> -->
-					<li class="nav-item">
-						<a href="{{ site_url('adm/rep_batches') }}" class="nav-link {{ active_link('rep_batches') }}">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Program</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ site_url('adm/rep_meetings') }}" class="nav-link {{ active_link('rep_meetings') }}">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Pertemuan</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ site_url('adm/rep_progresses') }}" class="nav-link {{ active_link('rep_progresses') }}">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Progress Peserta</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ site_url('adm/rep_requirements') }}" class="nav-link {{ active_link('rep_requirements') }}">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Syarat Kelulusan</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ site_url('adm/rep_graduations') }}" class="nav-link {{ active_link('rep_graduations') }}">
-							<i class="nav-icon fas fa-file-alt"></i>
-							<p>Kelulusan</p>
-						</a>
-					</li>
-					{% endif %}
-
-  					<li class="nav-header">Konfigurasi</li>
-  					<li class="nav-item">
-  						<a href="{{ site_url('adm/users') }}" class="nav-link {{ active_link('users') }}">
-  							<i class="nav-icon fas fa-cog"></i>
-  							<p>Pengguna</p>
-  						</a>
-  					</li>
+					
   				</ul>
   			</nav>
   			<!-- /.sidebar-menu -->
