@@ -12,12 +12,11 @@ function logged_user($show)
 
 	$ci->load->model('Karyawan_model');
 
-	$id = $ci->session->userdata('id');
-	
-	$where = array(
-		"karyawan_id"      => $id
-	);
+	$karyawan_id = $ci->session->userdata('user_id');
 
+	$where = array(
+		"karyawan_id" => $karyawan_id
+	);
 	$check_user = $ci->Karyawan_model->get_data_karyawan($where)->row_array();
 
 	// ketika user tersedia
@@ -43,13 +42,12 @@ function check_roles($hak_akses_id)
 
 	$ci->load->model('Karyawan_model');
 
-	$id = $ci->session->userdata('id');
+	$karyawan_id = $ci->session->userdata('user_id');
 
 	$where = array(
-		"karyawan_id"      => $id,
-		"a.hak_akses_id"   => $hak_akses_id
+		"karyawan_id"    => $karyawan_id,
+		"a.hak_akses_id" => $hak_akses_id
 	);
-	
 	$check_user = $ci->Karyawan_model->get_data_karyawan($where)->row_array();
 
 	return $check_user;

@@ -11,7 +11,7 @@ function menu_open_master()
     $CI = &get_instance();
      
     $class  = $CI->router->fetch_class();
-    $master = array("trainees", "companies", "job_titles", "requirements");
+    $master = array("karyawan", "jabatan", "jenis_cuti");
 	
     return (in_array($class, $master)) ? 'menu-open' : '';
 }
@@ -21,7 +21,7 @@ function active_link_master()
     $CI = &get_instance();
      
     $class  = $CI->router->fetch_class();
-    $master = array("trainees", "companies", "job_titles", "requirements");
+    $master = array("karyawan", "jabatan", "jenis_cuti");
 	
     return (in_array($class, $master)) ? 'active' : '';
 }

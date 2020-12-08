@@ -30,24 +30,22 @@ class Loginweb extends CI_Controller
 	{
 		$email      = $this->input->post('email');
 		$kata_sandi = $this->input->post('kata_sandi');
-
-		$where = array(
-			"email"      => $email,
-			"kata_sandi" => md5($kata_sandi)
-		);
 		
-		$login = $this->Karyawan_model->get_data_karyawan($where)->row();
+		$where = array(
+			"karyawan_id" => $login->karyawan_id,
+			"kata_sandi"  => md5($kata_sandi)
+		);
+		$login = $this->Karyawan_model->get_data_karyawan($karyawan)->row();
 
 		if ($login)
 		{
 			$session = array(
-				'id'        => $login->karyawan_id,
-				'hak_akses' => $login->hak_akses
+				"user_id"      => $login->karyawan_id,
+				"hak_akses_id" => $login->hak_akses_id
 			);
 
 			$this->session->set_userdata($session);
 
-			// echo json_encode($session);
 			redirect('adm/dashboard');
 		}
 		else
