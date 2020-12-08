@@ -1,4 +1,4 @@
-<form class="master-form" action="{{ site_url('adm/job_titles/save') }}" method="POST">
+<form class="master-form" action="{{ site_url('adm/jabatan/save') }}" method="POST">
 
 	<div class="modal-header">
 		<h5 class="modal-title">{{ content_title }}</h5>
@@ -13,10 +13,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<label class="control-label">Nama Jabatan</label>
+					<label class="control-label">Jabatan</label>
 
-					<input type="text" class="form-control" id="namecheck" name="name" tabindex="1"
-						value="{{ check_array_key(get_data, 'job_title_name') }}" required="required">
+					<input type="text" class="form-control" id="namecheck" name="nama" tabindex="1"
+						value="{{ check_array_key(get_data, 'jabatan_nama') }}" required="required">
 
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 
 	var elDivID = "#namecheck";
 	var elResult = ".result_check";
-	var elUrl = "{{ site_url('adm/job_titles/check_id') }}";
+	var elUrl = "{{ site_url('adm/jabatan/check_id') }}";
 	var elBtn = ".btn-save";
 
 	window.FORM.handleCheckField2(elDivID, elResult, elUrl, elBtn, "", "");

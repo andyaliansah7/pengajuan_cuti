@@ -1,5 +1,5 @@
 /**
- * Javascript Job Titles
+ * Javascript Jabatan
  *
  * @author Andy Aliansah <andyaliansah97@gmail.com>
  *
@@ -11,7 +11,7 @@ window.MASTER = (function ($) {
 	}
 
 	var renderEdit = function (data, type, full, meta) {
-		var url = APP.siteUrl + 'adm/job_titles/edit/' + full['id'];
+		var url = APP.siteUrl + 'adm/jabatan/edit/' + full['id'];
 		return '<a class="master-edit" href="' + url + '" data-toggle="tooltip" data-placement="right" title="Click For Edit">' + data + '</a>';
 	}
 
@@ -28,8 +28,8 @@ window.MASTER = (function ($) {
 		elSubCheckbox: '.check-sub-master',
 		elParentCheckbox: '.check-all-master',
 		elModalContent: '.master-modal-content',
-		urlDeleteData: window.APP.siteUrl + 'adm/job_titles/delete',
-		urlRequestData: window.APP.siteUrl + 'adm/job_titles/get_data',
+		urlDeleteData: window.APP.siteUrl + 'adm/jabatan/delete',
+		urlRequestData: window.APP.siteUrl + 'adm/jabatan/get_data',
 
 		urlBahasa: window.APP.baseUrl + 'assets/js/vendor/indonesia.json',
 
@@ -57,7 +57,7 @@ window.MASTER = (function ($) {
 
 		},
 
-		// Job Titles : handleDataTable
+		// Jabatan : handleDataTable
 		handleDataTable: function () {
 			var parentThis = this;
 
@@ -75,7 +75,7 @@ window.MASTER = (function ($) {
 						render: renderCheckbox
 					},
 					{
-						data: 'name',
+						data: 'nama',
 						render: renderEdit
 					}
 				],
@@ -111,7 +111,7 @@ window.MASTER = (function ($) {
 			});
 		},
 
-		// Job Titles : handleDelete
+		// Jabatan : handleDelete
 		handleDelete: function () {
 			var parentThis = this;
 
