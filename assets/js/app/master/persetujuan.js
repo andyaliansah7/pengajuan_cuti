@@ -1,18 +1,19 @@
 /**
- * Javascript Dashboard
+ * Javascript Persetujuan
  *
  * @author Andy Aliansah <andyaliansah97@gmail.com>
  *
  */
-window.DASHBOARD = (function ($) {
+window.MASTER = (function ($) {
 
 	var renderCheckbox = function (data, type, full, meta) {
 		return '<input class="check-sub-master" type="checkbox" value="' + full['id'] + '">';
 	}
 
 	var renderEdit = function (data, type, full, meta) {
-		var url = APP.siteUrl + 'adm/dashboard/edit_pengajuan/' + full['id'];
-		return '<a class="master-edit" href="' + url + '" data-toggle="tooltip" data-placement="right" title="Click For Edit">' + data + '</a>';
+		var approve = APP.siteUrl + 'adm/persetujuan/save/approve/' + full['id'];
+		var reject  = APP.siteUrl + 'adm/persetujuan/save/reject/' + full['id'];
+		return '<a href="' + approve + '" class="btn btn-success btn-xs"><i class="far fa-check-circle"></i>&nbsp;Terima</a><a href="' + reject + '" class="btn btn-danger btn-xs" style="margin-left:2%"><i class="far fa-times-circle"></i>&nbsp;Tolak</a><button type="button" class="btn btn-primary btn-xs" style="margin-left:2%"><i class="far fa-sticky-note"></i>&nbsp;Cetak</button>';
 	}
 
 	return {
@@ -28,8 +29,8 @@ window.DASHBOARD = (function ($) {
 		elSubCheckbox: '.check-sub-master',
 		elParentCheckbox: '.check-all-master',
 		elModalContent: '.master-modal-content',
-		urlDeleteData: window.APP.siteUrl + 'adm/dashboard/delete_pengajuan',
-		urlRequestData: window.APP.siteUrl + 'adm/dashboard/get_data_pengajuan',
+		urlDeleteData: window.APP.siteUrl + 'adm/persetujuan/delete',
+		urlRequestData: window.APP.siteUrl + 'adm/persetujuan/get_data',
 
 		urlBahasa: window.APP.baseUrl + 'assets/js/vendor/indonesia.json',
 
@@ -57,7 +58,7 @@ window.DASHBOARD = (function ($) {
 
 		},
 
-		// Pengajuan : handleDataTable
+		// Persetujuan : handleDataTable
 		handleDataTable: function () {
 			var parentThis = this;
 
@@ -75,8 +76,7 @@ window.DASHBOARD = (function ($) {
 					},
 					{
 						data: 'nomor',
-						className: 'fit-width',
-						render: renderEdit
+						className: 'fit-width'
 					},
 					{
 						data: 'jenis_cuti',
@@ -101,6 +101,10 @@ window.DASHBOARD = (function ($) {
 					{
 						data: 'status',
 						className: 'fit-width'
+					},
+					{
+						render: renderEdit,
+						className: 'fit-width'
 					}
 				],
 
@@ -108,7 +112,7 @@ window.DASHBOARD = (function ($) {
 				deferRender: true,
 				scrollX: true,
 				"columnDefs": [{
-					"targets": [0],
+					"targets": [0,8],
 					"orderable": false,
 				}],
 				"language": {
@@ -135,7 +139,7 @@ window.DASHBOARD = (function ($) {
 			});
 		},
 
-		// Pengajuan : handleDelete
+		// Persetujuan : handleDelete
 		handleDelete: function () {
 			var parentThis = this;
 
