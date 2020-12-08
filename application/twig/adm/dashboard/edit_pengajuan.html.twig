@@ -1,0 +1,110 @@
+<form class="master-form" action="{{ site_url('adm/dashboard/save_pengajuan') }}" method="POST">
+
+	<div class="modal-header">
+		<h5 class="modal-title">{{ content_title }}</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<input class="form-control" name="id" value="{{ id }}" type="hidden">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">Jenis Cuti</label>
+
+					<select class="form-control select2" name="jenis_cuti" tabindex="1" required="required">
+						<option value="">- Pilih -</option>
+						{% if jenis_cuti_data %}
+						{% for jenis_cuti_row in jenis_cuti_data %}
+						<option value="{{ jenis_cuti_row.jenis_cuti_id }}"
+							{% if same(jenis_cuti_row.jenis_cuti_id, check_array_key(get_data, 'jenis_cuti_id')) %}
+							selected="selected" {% endif %}>{{ jenis_cuti_row.jenis_cuti_nama }}</option>
+						{% endfor %}
+						{% endif %}
+					</select>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Dari Tanggal</label>
+					<input type="date" class="form-control" name="dari_tanggal" tabindex="2" value="{{ check_array_key(get_data, 'dari_tanggal') }}">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Sampai Tanggal</label>
+					<input type="date" class="form-control" name="sampai_tanggal" tabindex="3" value="{{ check_array_key(get_data, 'sampai_tanggal') }}">
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">Penugasan</label>
+
+					<select class="form-control select2" name="penugasan" tabindex="4" required="required">
+						<option value="">- Pilih -</option>
+						{% if karyawan_data %}
+						{% for karyawan_row in karyawan_data %}
+						<option value="{{ karyawan_row.karyawan_id }}"
+							{% if same(karyawan_row.karyawan_id, check_array_key(get_data, 'karyawan_id')) %}
+							selected="selected" {% endif %}>{{ karyawan_row.nama_lengkap }}</option>
+						{% endfor %}
+						{% endif %}
+					</select>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>Pekerjaan</label>
+					<input type="text" class="form-control" name="pekerjaan" tabindex="5" value="{{ check_array_key(get_data, 'pekerjaan') }}">
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>Keterangan</label>
+					<textarea class="form-control" name="keterangan" tabindex="6">{{ check_array_key(get_data, 'keterangan') }}</textarea>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default waves-effect master-cancel" data-dismiss="modal">Batal</button>
+
+		<div class="btn-group" role="group">
+	        <button name="action" value="save" class="btn btn-primary btn-save" type="submit">
+	        	Simpan
+	        </button>
+	        <button type="button" class="btn btn-primary btn-save dropdown-toggle" data-toggle="dropdown"
+	        	aria-haspopup="true" aria-expanded="false">
+	        </button>
+			<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+				<!-- <a class="dropdown-item" href="#">Dropdown link</a> -->
+				<button class="dropdown-item" name="action" value="save_new" type="submit" href="#">Simpan &amp; Baru</button>
+				<button class="dropdown-item" name="action" value="save_close" type="submit" href="#">Simpan &amp; Tutup</button>
+			</div>
+		</div>
+	</div>
+
+</form>
+
+<script type="text/javascript">
+
+	var elDivID = "#emailcheck";
+	var elResult = ".result_check";
+	var elUrl = "{{ site_url('adm/karyawan/check_id') }}";
+	var elBtn = ".btn-save";
+
+	{# window.FORM.handleCheckField2(elDivID, elResult, elUrl, elBtn, "", ""); #}
+	window.INPUT.handleSelect2();
+	window.DATETIME.initDatePicker();
+
+</script>

@@ -1,4 +1,8 @@
 {% extends 'adm/layout.html.twig' %}
+{% block add_css %}
+{{ parent() }}
+
+{% endblock %}
 
 {% block content %}
 <div class="content-wrapper" id="vue-master">
@@ -21,243 +25,246 @@
   </div>
   <!-- /.content-header -->
 
-	<div class="container-fluid">
-		
-    <div class="row">
-      
-      <div class="col-md-3 col-sm-6 col-12">
-        <a href="{{ site_url('adm/rep_trainees') }}">
-          <div class="info-box bg-info">
-            <span class="info-box-icon"><i class="fas fa-user-astronaut"></i></span>
+  <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
 
-            <div class="info-box-content">
-              <span class="info-box-text">Peserta</span>
-              <span class="info-box-number">{{ trainee_total }}</span>
-
-              <div class="progress">
-                <div class="progress-bar" {{ trainee_percentage }}></div>
-              </div>
-              <span class="progress-description">
-                {{ trainee_total_new }} Peserta baru
-              </span>
-            </div>
-            
-          </div>
-        </a>
-      </div>
-		  
-    </div>
-    
-    <div class="row">
-
-      <!-- Left col -->
-      <section class="col-lg-7 connectedSortable">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i class="fas fa-trophy mr-1 mt-2"></i>
-              Top Client
-            </h3>
-            <div class="card-tools">
-              <ul class="nav nav-pills ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#chart1" data-toggle="tab">Bar</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#chart2" data-toggle="tab">Donut</a>
-                </li>
-              </ul>
-            </div>
-          </div><!-- /.card-header -->
-          <div class="card-body">
-            <div class="tab-content p-0">
-              <div class="chart tab-pane active" id="chart1">
-                <canvas id="barChart"
-                  style="height: 350px;"></canvas>
-              </div>
-              <div class="chart tab-pane" id="chart2">
-                <canvas id="pieChart"
-                  style="height: 350px;"></canvas>
-              </div>
-            </div>
-          </div><!-- /.card-body -->
-        </div>
-
-        <div class="card">
-        	<div class="card-header">
-        		<h3 class="card-title">
-        			<i class="fas fa-calendar mr-1 mt-2"></i>
-        			Laporan Tahunan
-        		</h3>
-        		<!-- <div class="card-tools">
-        		</div> -->
-        	</div><!-- /.card-header -->
-        	<div class="card-body">
-              <label>Jumlah Peserta</label>
-              <canvas id="traineeChart" style="width: 100%;"></canvas>
-              <div style="padding-top: 10%;"></div>
-              <label>Jumlah Program</label>
-              <canvas id="programChart" style="width: 100%;"></canvas>
-        	</div><!-- /.card-body -->
-        </div>
-      </section>
-      <!-- /.Left col -->
-
-      <!-- right col (We are only adding the ID to make the widgets sortable)-->
-      <section class="col-lg-5 connectedSortable">
-
-        <div class="card">
-          <div class="card-header border-0">
-            <h3 class="card-title">
-              <i class="fas fa-network-wired mr-1 mt-2"></i>
-              Program Berjalan
-            </h3>
-            <!-- card tools -->
-            <div class="card-tools">
-              <button type="button" class="btn btn-sm" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-            </div>
-            <!-- /.card-tools -->
-          </div>
-          <div class="card-body">
-            <div style="height: 270px; width: 100%;">
-              
-              {% if ongoing_program %}
-              {% for laporan in ongoing_program %}
-              {% set no = no + 1 %}
-              <a href="{{ laporan.link }}" class="d-block">
-              <div class="info-box {{ laporan.bgcolor }}">
-                <span class="info-box-icon text-white"><i class="fas {{ laporan.icon }}"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-number text-white">{{ laporan.name }} ({{ laporan.batch }})</span>
-                  <span class="info-box-text text-white">{{ indonesian_date(laporan.start_date) }}  -  {{ indonesian_date(laporan.end_date) }}</span>
+            <!-- Profile Image -->
+            <div class="card card-info card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="{{ base_url('assets/adminLTE/dist/img/avatar5.png') }}"
+                       alt="User profile picture">
                 </div>
 
+                <h3 class="profile-username text-center">{% if(logged_user('nama_lengkap') != "") %} {{ logged_user('nama_lengkap') }} {% endif %}</h3>
+
+                <p class="text-muted text-center">{{ check_array_key(get_data, 'jabatan_nama') }}</p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Jumlah Cuti</b> <a class="float-right">{{ quota }} Hari /Tahun</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Terpakai</b> <a class="float-right">{{ approved }} Hari</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Sisa Cuti Tahun Ini</b> <a class="float-right">{{ remaining }} Hari</a>
+                  </li>
+                </ul>
+
+                <a href="{{ site_url('adm/karyawan/edit/') ~logged_user('karyawan_id') }}" class="btn btn-info btn-block master-edit"><b>Edit Profil</b></a>
               </div>
-              </a>
-              {% endfor %}
-              {% else %}
-                Tidak ada data
-              {% endif %}
-            
+              <!-- /.card-body -->
             </div>
+            <!-- /.card -->
+
+            <!-- About Me Box -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Tentang Saya</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-book mr-1"></i> Pendidikan</strong>
+
+                <p class="text-muted">
+                  {{ check_array_key(get_data, 'pendidikan') }}
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
+
+                <p class="text-muted">
+                  {{ check_array_key(get_data, 'alamat') }}
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Email</strong>
+
+                <p class="text-muted">
+                  {{ check_array_key(get_data, 'email') }}
+                </p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i> Catatan</strong>
+
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
           </div>
-          <div class="card-footer bg-transparent">
+          <!-- /.col -->
+
+      
+		  
+          <div class="col-md-9">
+
             <div class="row">
-              <div class="col-12">
-                <a href="{{ site_url('adm/rep_batches') }}" style="color: black;">
-                  <div class="text-black float-right">Selengkapnya</div>
+              <div class="col-md-3">
+                <a href="{{ site_url('adm/rep_trainees') }}">
+                  <div class="info-box bg-info">
+                    <span class="info-box-icon"><i class="fas fa-user-astronaut"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Karyawan</span>
+                      
+                      <div class="progress">
+                        <div class="progress-bar" style="width:100%"></div>
+                      </div>
+                      <span class="progress-description">
+                        {{ employee_total }}
+                      </span>
+                    </div>
+                    
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-md-3">
+                <a href="{{ site_url('adm/rep_companies') }}">
+                  <div class="info-box bg-warning">
+                    <span class="info-box-icon"><i class="far fa-clock"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Menunggu Persetujuan</span>
+
+                      <div class="progress">
+                        <div class="progress-bar" style="width:100%"></div>
+                      </div>
+                      <span class="progress-description">
+                        {{ pending_total }}
+                      </span>
+                    </div>
+                    
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-md-3">
+                <a href="{{ site_url('adm/rep_trainees') }}">
+                  <div class="info-box bg-success">
+                    <span class="info-box-icon"><i class="far fa-check-circle"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Disetujui</span>
+
+                      <div class="progress">
+                        <div class="progress-bar" style="width:100%"></div>
+                      </div>
+                      <span class="progress-description">
+                        {{ approved_total }}
+                      </span>
+                    </div>
+                    
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-md-3">
+                <a href="{{ site_url('adm/rep_trainees') }}">
+                  <div class="info-box bg-danger">
+                    <span class="info-box-icon"><i class="far fa-times-circle"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Ditolak</span>
+
+                      <div class="progress">
+                        <div class="progress-bar" style="width:100%"></div>
+                      </div>
+                      <span class="progress-description">
+                        {{ rejected_total }}
+                      </span>
+                    </div>
+                    
+                  </div>
                 </a>
               </div>
             </div>
+
+            <div class="card" style="max-height:450px">
+                
+                <div class="card-body">
+                   {# <label>Jumlah Peserta</label> #}
+                   <canvas id="mainChart" style="width: 100%; height: 350px;"></canvas>
+                </div>
+
+            </div>
+
+            <div class="card">
+                
+                <div class="card-header">
+                  <h3 class="card-title">Histori Pengajuan Cuti</h3>
+                </div>
+                <div class="card-body">
+                  <div>
+                    <table id="master-table" class="table table-striped table-bordered" width="100%">
+                        <thead>
+                          <tr>
+                            <th class="fit-width">
+                              <input class="check-all-master" type="checkbox">
+                            </th>
+                            <th class="fit-width">
+                              Nomor
+                            </th>
+                            <th class="fit-width">
+                              Jenis
+                            </th>
+                            <th class="fit-width">
+                              Tanggal
+                            </th>
+                            <th class="fit-width">
+                              Penugasan
+                            </th>
+                            <th class="fit-width">
+                              Pekerjaan
+                            </th>
+                            <th class="fit-width">
+                              Keterangan
+                            </th>
+                            <th class="fit-width">
+                              Status
+                            </th>
+                          </tr>
+                        </thead>
+                    </table>
+                  </div>
+                </div>
+
+            </div>
+
+            <a class="btn btn-info master-edit mb-5" href="{{ site_url('adm/dashboard/edit_pengajuan/new') }}">
+              <i class="far fa-edit"></i>&nbsp; Buat Pengajuan
+            </a>
+
+            <button class="btn btn-danger master-delete mb-5">
+              <i class="far fa-trash-alt"></i>&nbsp; Hapus
+            </button>
+
+            <!-- /.nav-tabs-custom -->
           </div>
+          <!-- /.col -->
         </div>
+        <!-- /.row -->
+      </div>
+  </section>
 
-        <div class="card bg-fuel">
-          <div class="card-header border-0">
-            <h3 class="card-title">
-              <i class="fas fa-random mr-1 mt-2"></i>
-              Program Public Selanjutnya
-            </h3>
-            <!-- card tools -->
-            <div class="card-tools">
-              <button type="button" class="btn btn-sm text-white" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-            </div>
-            <!-- /.card-tools -->
-          </div>
-          <div class="card-body">
-            <div style="height: 270px; width: 100%;">
-
-              {% if next_public_program %}
-              {% for laporan in next_public_program %}
-              {% set no = no + 1 %}
-              <div class="info-box bg-pastelred">
-              	<span class="info-box-icon"><i class="fas {{ laporan.icon }}"></i></span>
-
-              	<div class="info-box-content">
-              		<span class="info-box-number">{{ laporan.name }} ({{ laporan.batch }})</span>
-              		<span class="info-box-text">{{ indonesian_date(laporan.start_date) }} -
-              			{{ indonesian_date(laporan.end_date) }}</span>
-              	</div>
-
-              </div>
-              {% endfor %}
-              {% else %}
-              Tidak ada data
-              {% endif %}
-
-            </div>
-          </div>
-          <div class="card-footer bg-transparent">
-            <div class="row">
-              <div class="col-12">
-                <a href="{{ site_url('adm/rep_batches') }}" style="color: white;">
-                	<div class="text-black float-right">Selengkapnya</div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card bg-fuel">
-          <div class="card-header border-0">
-            <h3 class="card-title">
-              <i class="fas fa-compress-arrows-alt mr-1 mt-2"></i>
-              Program Inhouse Selanjutnya
-            </h3>
-            <!-- card tools -->
-            <div class="card-tools">
-              <button type="button" class="btn btn-sm text-white" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-            </div>
-            <!-- /.card-tools -->
-          </div>
-          <div class="card-body">
-            <div style="height: 270px; width: 100%;">
-
-              {% if next_inhouse_program %}
-              {% for laporan in next_inhouse_program %}
-              {% set no = no + 1 %}
-              <div class="info-box bg-cassandrayellow">
-              	<span class="info-box-icon"><i class="fas {{ laporan.icon }}"></i></span>
-
-              	<div class="info-box-content">
-              		<span class="info-box-number">{{ laporan.name }} ({{ laporan.batch }})</span>
-              		<span class="info-box-text">{{ indonesian_date(laporan.start_date) }} -
-              			{{ indonesian_date(laporan.end_date) }}</span>
-              	</div>
-
-              </div>
-              {% endfor %}
-              {% else %}
-              Tidak ada data
-              {% endif %}
-
-            </div>
-          </div>
-          <div class="card-footer bg-transparent">
-            <div class="row">
-              <div class="col-12">
-                <a href="{{ site_url('adm/rep_batches') }}" style="color: white;">
-                	<div class="text-black float-right">Selengkapnya</div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </section>
-      <!-- right col -->
-    
-    </div>
-  
-  </div>
-
+</div>
+<div class="modal fade master-modal" id="modal-default">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content master-modal-content">
+			Loading...
+		</div>
+	</div>
 </div>
 
 {% endblock  %}
@@ -265,5 +272,69 @@
 {% block add_javascript %}
 	{{ parent() }}
 
+  <script type="text/javascript" src="{{ assets_url('assets/js/app/dashboard.js?') }}"></script>
+
+  <script type="text/javascript">
+    window.DASHBOARD.handleVueMaster();
+
+    var mainCtx = document.getElementById('mainChart').getContext('2d');
+    var cData = JSON.parse('{{ chart_data }}');
+
+    var mainChart = new Chart(mainCtx, {
+    type: 'line',
+    scaleOverride : true,
+    scaleSteps : 10,
+    scaleStepWidth : 50,
+    scaleStartValue : 0,
+    data: {
+        labels: [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+        ],
+        
+        datasets: [
+          {
+            label: 'Jumlah Pengajuan',
+            backgroundColor: 'transparent',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            data: cData.data_pengajuan
+          }
+        ]
+      },
+      options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                hover: {
+                    mode: 'label'
+                },
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            // stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                                // steps: 10,
+                                // stepValue: 10,
+                                // max: 50
+                            }
+                        }]
+                },
+            }
+    });
+
+  </script>
 
 {% endblock  %}

@@ -32,10 +32,10 @@ class Loginweb extends CI_Controller
 		$kata_sandi = $this->input->post('kata_sandi');
 		
 		$where = array(
-			"karyawan_id" => $login->karyawan_id,
-			"kata_sandi"  => md5($kata_sandi)
+			"email"      => $email,
+			"kata_sandi" => md5($kata_sandi)
 		);
-		$login = $this->Karyawan_model->get_data_karyawan($karyawan)->row();
+		$login = $this->Karyawan_model->get_data_karyawan($where)->row();
 
 		if ($login)
 		{
