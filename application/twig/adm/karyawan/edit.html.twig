@@ -101,15 +101,33 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label">Kata Sandi</label>
-					<input type="password" class="form-control" name="kata_sandi" tabindex="9">
+					<label class="control-label">Jatah Cuti/Tahun</label>
+					<input type="text" class="form-control" name="jatah_cuti_pertahun" tabindex="9" value="{{ check_array_key(get_data, 'jatah_cuti_pertahun') }}">
 				</div>
 			</div>
 
 			<div class="col-md-6">
 				<div class="form-group">
+					<label class="control-label">Pendidikan</label>
+					<input type="text" class="form-control" name="pendidikan" tabindex="10" value="{{ check_array_key(get_data, 'pendidikan') }}">
+				</div>
+			</div>
+		</div>
+
+		{# Line 5 #}
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Kata Sandi</label>
+					<input type="password" class="form-control" name="kata_sandi" tabindex="11">
+				</div>
+			</div>
+
+			{% if check_roles('1') %}
+			<div class="col-md-6">
+				<div class="form-group">
 					<label>Hak Akses</label>
-					<select class="form-control select2" name="hak_akses" tabindex="10" required="required">
+					<select class="form-control select2" name="hak_akses" tabindex="12" required="required">
 						<option value="">- Pilih -</option>
 						{% if hak_akses_data %}
 						{% for hak_akses_row in hak_akses_data %}
@@ -121,6 +139,7 @@
 					</select>
 				</div>
 			</div>
+			{% endif %}
 		</div>
 
 		{# Line 6 #}
@@ -128,7 +147,17 @@
 			<div class="col-md-12">
 				<div class="form-group">
 					<label class="control-label">Alamat</label>
-					<textarea class="form-control" name="alamat" tabindex="11">{{ check_array_key(get_data, 'alamat') }}</textarea>
+					<textarea class="form-control" name="alamat" tabindex="13">{{ check_array_key(get_data, 'alamat') }}</textarea>
+				</div>
+			</div>
+		</div>
+
+		{# Line 7 #}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">Catatan</label>
+					<textarea class="form-control" name="catatan" tabindex="14">{{ check_array_key(get_data, 'catatan') }}</textarea>
 				</div>
 			</div>
 		</div>

@@ -87,47 +87,61 @@ class Karyawan extends BaseController {
 
 	public function save() {
 		// post
-		$id            = $this->input->post('id');
-		$nomor_induk   = $this->input->post('nomor_induk');
-		$nama_lengkap  = $this->input->post('nama_lengkap');
-		$tempat_lahir  = $this->input->post('tempat_lahir');
-		$tanggal_lahir = $this->input->post('tanggal_lahir');
-		$jenis_kelamin = $this->input->post('jenis_kelamin');
-		$jabatan       = $this->input->post('jabatan');
-		$kata_sandi    = $this->input->post('kata_sandi');
-		$hak_akses     = $this->input->post('hak_akses');
-		$telepon       = $this->input->post('telepon');
-		$email         = $this->input->post('email');
-		$alamat        = $this->input->post('alamat');
+		$id                  = $this->input->post('id');
+		$nomor_induk         = $this->input->post('nomor_induk');
+		$nama_lengkap        = $this->input->post('nama_lengkap');
+		$tempat_lahir        = $this->input->post('tempat_lahir');
+		$tanggal_lahir       = $this->input->post('tanggal_lahir');
+		$jenis_kelamin       = $this->input->post('jenis_kelamin');
+		$jabatan             = $this->input->post('jabatan');
+		$kata_sandi          = $this->input->post('kata_sandi');
+		$hak_akses           = $this->input->post('hak_akses');
+		$telepon             = $this->input->post('telepon');
+		$email               = $this->input->post('email');
+		$alamat              = $this->input->post('alamat');
+		$jatah_cuti_pertahun = $this->input->post('jatah_cuti_pertahun');
+		$pendidikan          = $this->input->post('pendidikan');
+		$catatan             = $this->input->post('catatan');
 
+		$role = $hak_akses;
+		if($hak_akses == ''){
+			$role = ($hak_akses == '' ? '2' : '1');
+		}
+		
 		$action    = $this->input->post('action');
 
 		if ($kata_sandi != "") {
 			$data_save = array(
-				'jabatan_id'       => $jabatan,
-				'jenis_kelamin_id' => $jenis_kelamin,
-				'hak_akses_id'     => $hak_akses,
-				'nomor_induk'      => $nomor_induk,
-				'nama_lengkap'     => $nama_lengkap,
-				'tempat_lahir'     => $tempat_lahir,
-				'tanggal_lahir'    => change_format_date($tanggal_lahir),
-				'telepon'          => $telepon,
-				'email'            => $email,
-				'alamat'           => $alamat,
-				'kata_sandi'       => md5($kata_sandi)
+				'jabatan_id'          => $jabatan,
+				'jenis_kelamin_id'    => $jenis_kelamin,
+				'hak_akses_id'        => $role,
+				'nomor_induk'         => $nomor_induk,
+				'nama_lengkap'        => $nama_lengkap,
+				'tempat_lahir'        => $tempat_lahir,
+				'tanggal_lahir'       => change_format_date($tanggal_lahir),
+				'telepon'             => $telepon,
+				'email'               => $email,
+				'alamat'              => $alamat,
+				'jatah_cuti_pertahun' => $jatah_cuti_pertahun,
+				'pendidikan'          => $pendidikan,
+				'catatan'             => $catatan,
+				'kata_sandi'          => md5($kata_sandi)
 			);
 		}else{
 			$data_save = array(
-				'jabatan_id'       => $jabatan,
-				'jenis_kelamin_id' => $jenis_kelamin,
-				'hak_akses_id'     => $hak_akses,
-				'nomor_induk'      => $nomor_induk,
-				'nama_lengkap'     => $nama_lengkap,
-				'tempat_lahir'     => $tempat_lahir,
-				'tanggal_lahir'    => change_format_date($tanggal_lahir),
-				'telepon'          => $telepon,
-				'email'            => $email,
-				'alamat'           => $alamat
+				'jabatan_id'          => $jabatan,
+				'jenis_kelamin_id'    => $jenis_kelamin,
+				'hak_akses_id'        => $role,
+				'nomor_induk'         => $nomor_induk,
+				'nama_lengkap'        => $nama_lengkap,
+				'tempat_lahir'        => $tempat_lahir,
+				'tanggal_lahir'       => change_format_date($tanggal_lahir),
+				'telepon'             => $telepon,
+				'email'               => $email,
+				'alamat'              => $alamat,
+				'jatah_cuti_pertahun' => $jatah_cuti_pertahun,
+				'pendidikan'          => $pendidikan,
+				'catatan'             => $catatan
 			);
 		}
 

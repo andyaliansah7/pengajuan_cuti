@@ -87,6 +87,10 @@ window.MASTER = (function ($) {
 						className: 'fit-width'
 					},
 					{
+						data: 'karyawan_nama',
+						className: 'fit-width'
+					},
+					{
 						data: 'penugasan_nama',
 						className: 'fit-width'
 					},
