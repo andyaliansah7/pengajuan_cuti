@@ -1,6 +1,6 @@
 <?php
 /**
- * Trainees Model
+ * Karyawan Model
  * Modif Core Model with Namespace
  *
  * @author Andy Aliansah <andyaliansah97@gmail.com>
@@ -16,8 +16,7 @@ class Karyawan_model extends Model {
         $sql->from('master_karyawan a');
         $sql->join('master_jabatan b', 'b.jabatan_id = a.jabatan_id', 'inner');
         $sql->join('master_jenis_kelamin c', 'c.jenis_kelamin_id = a.jenis_kelamin_id', 'inner');
-		$sql->join('master_hak_akses d', 'd.hak_akses_id = a.hak_akses_id', 'inner');
-		
+        $sql->join('master_hak_akses d', 'd.hak_akses_id = a.hak_akses_id', 'inner');
 		$sql->order_by('nama_lengkap');
 		
 		if ($where != "")
@@ -30,16 +29,31 @@ class Karyawan_model extends Model {
 		return $get;
 	}
 
-	public function get_data_jenis_kelamin($where="") {
+	public function get_data_jenis_kelamin($id='') {
 		$sql = $this->db;
 
 		$sql->select('*');
         $sql->from('master_jenis_kelamin');
-		$sql->order_by('jenis_kelamin');
+		$sql->order_by('jenis_kelamin_nama');
 
-		if ($where != "")
-		{
-			$sql->where($where);
+		if ($id != "") {
+			$sql->where('jenis_kelamin_id', $id);
+		}
+
+		$get = $sql->get();
+
+		return $get;
+	}
+
+	public function get_data_hak_akses($id='') {
+		$sql = $this->db;
+
+		$sql->select('*');
+        $sql->from('master_hak_akses');
+		$sql->order_by('hak_akses_nama');
+
+		if ($id != "") {
+			$sql->where('hak_akses_id', $id);
 		}
 
 		$get = $sql->get();

@@ -1,0 +1,169 @@
+<form class="master-form" action="{{ site_url('adm/karyawan/save') }}" method="POST">
+
+	<div class="modal-header">
+		<h5 class="modal-title">{{ content_title }}</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<input class="form-control" name="id" value="{{ id }}" type="hidden">
+
+		{# Line 1 #}
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Nomor Induk Karyawan</label>
+					<input type="text" class="form-control" name="nomor_induk" tabindex="1" value="{{ check_array_key(get_data, 'nomor_induk') }}" required="required">
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Nama Lengkap</label>
+					<input type="text" class="form-control" name="nama_lengkap" tabindex="2" value="{{ check_array_key(get_data, 'nama_lengkap') }}">
+				</div>
+			</div>
+		</div>
+
+		{# Line 2 #}
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Tempat</label>
+					<input type="text" class="form-control" name="tempat_lahir" tabindex="3" value="{{ check_array_key(get_data, 'tempat_lahir') }}">
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Tanggal Lahir</label>
+					<input type="date" class="form-control" name="tanggal_lahir" tabindex="4" value="{{ check_array_key(get_data, 'tanggal_lahir') }}">
+				</div>
+			</div>
+		</div>
+
+		{# Line 3 #}
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Jenis Kelamin</label>
+					<select class="form-control select2" name="jenis_kelamin" tabindex="5" required="required">
+						<option value="">- Pilih -</option>
+						{% if jenis_kelamin_data %}
+						{% for jenis_kelamin_row in jenis_kelamin_data %}
+						<option value="{{ jenis_kelamin_row.jenis_kelamin_id }}"
+							{% if same(jenis_kelamin_row.jenis_kelamin_id, check_array_key(get_data, 'jenis_kelamin_id')) %}
+							selected="selected" {% endif %}>{{ jenis_kelamin_row.jenis_kelamin_nama }}</option>
+						{% endfor %}
+						{% endif %}
+					</select>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Jabatan</label>
+					<select class="form-control select2" name="jabatan" tabindex="6" required="required">
+						<option value="">- Pilih -</option>
+						{% if jabatan_data %}
+						{% for jabatan_row in jabatan_data %}
+						<option value="{{ jabatan_row.jabatan_id }}"
+							{% if same(jabatan_row.jabatan_id, check_array_key(get_data, 'jabatan_id')) %}
+							selected="selected" {% endif %}>{{ jabatan_row.jabatan_nama }}</option>
+						{% endfor %}
+						{% endif %}
+					</select>
+				</div>
+			</div>
+
+		</div>
+
+		{# Line 4 #}
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Telepon</label>
+					<input type="text" class="form-control" name="telepon" tabindex="7" value="{{ check_array_key(get_data, 'telepon') }}">
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Email</label>
+					<input type="email" id="emailcheck" class="form-control" name="email" tabindex="8" value="{{ check_array_key(get_data, 'email') }}">
+				</div>
+			</div>
+		</div>
+
+		{# Line 5 #}
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Kata Sandi</label>
+					<input type="password" class="form-control" name="kata_sandi" tabindex="9">
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Hak Akses</label>
+					<select class="form-control select2" name="hak_akses" tabindex="10" required="required">
+						<option value="">- Pilih -</option>
+						{% if hak_akses_data %}
+						{% for hak_akses_row in hak_akses_data %}
+						<option value="{{ hak_akses_row.hak_akses_id }}"
+							{% if same(hak_akses_row.hak_akses_id, check_array_key(get_data, 'hak_akses_id')) %}
+							selected="selected" {% endif %}>{{ hak_akses_row.hak_akses_nama }}</option>
+						{% endfor %}
+						{% endif %}
+					</select>
+				</div>
+			</div>
+		</div>
+
+		{# Line 6 #}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">Alamat</label>
+					<textarea class="form-control" name="alamat" tabindex="11">{{ check_array_key(get_data, 'alamat') }}</textarea>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default waves-effect master-cancel" data-dismiss="modal">Batal</button>
+
+		<div class="btn-group" role="group">
+	        <button name="action" value="save" class="btn btn-primary btn-save" type="submit">
+	        	Simpan
+	        </button>
+	        <button type="button" class="btn btn-primary btn-save dropdown-toggle" data-toggle="dropdown"
+	        	aria-haspopup="true" aria-expanded="false">
+	        </button>
+			<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+				<!-- <a class="dropdown-item" href="#">Dropdown link</a> -->
+				<button class="dropdown-item" name="action" value="save_new" type="submit" href="#">Simpan &amp; Baru</button>
+				<button class="dropdown-item" name="action" value="save_close" type="submit" href="#">Simpan &amp; Tutup</button>
+			</div>
+		</div>
+	</div>
+
+</form>
+
+<script type="text/javascript">
+
+	var elDivID = "#emailcheck";
+	var elResult = ".result_check";
+	var elUrl = "{{ site_url('adm/karyawan/check_id') }}";
+	var elBtn = ".btn-save";
+
+	window.FORM.handleCheckField2(elDivID, elResult, elUrl, elBtn, "", "");
+	window.INPUT.handleSelect2();
+	window.DATETIME.initDatePicker();
+
+</script>

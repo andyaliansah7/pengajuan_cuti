@@ -1,5 +1,5 @@
 /**
- * Javascript Trainees
+ * Javascript Karyawan
  *
  * @author Andy Aliansah <andyaliansah97@gmail.com>
  *
@@ -11,7 +11,7 @@ window.MASTER = (function ($) {
 	}
 
 	var renderEdit = function (data, type, full, meta) {
-		var url = APP.siteUrl + 'adm/trainees/edit/' + full['id'];
+		var url = APP.siteUrl + 'adm/karyawan/edit/' + full['id'];
 		return '<a class="master-edit" href="' + url + '" data-toggle="tooltip" data-placement="right" title="Click For Edit">' + data + '</a>';
 	}
 
@@ -28,8 +28,8 @@ window.MASTER = (function ($) {
 		elSubCheckbox: '.check-sub-master',
 		elParentCheckbox: '.check-all-master',
 		elModalContent: '.master-modal-content',
-		urlDeleteData: window.APP.siteUrl + 'adm/trainees/delete',
-		urlRequestData: window.APP.siteUrl + 'adm/trainees/get_data',
+		urlDeleteData: window.APP.siteUrl + 'adm/karyawan/delete',
+		urlRequestData: window.APP.siteUrl + 'adm/karyawan/get_data',
 
 		urlBahasa: window.APP.baseUrl + 'assets/js/vendor/indonesia.json',
 
@@ -57,7 +57,7 @@ window.MASTER = (function ($) {
 
 		},
 
-		// Trainees : handleDataTable
+		// Karyawan : handleDataTable
 		handleDataTable: function () {
 			var parentThis = this;
 
@@ -73,28 +73,24 @@ window.MASTER = (function ($) {
 						render: renderCheckbox
 					},
 					{
-						data: 'code',
+						data: 'nik',
 						className: 'fit-width',
 						render: renderEdit,
 					},
 					{
-						data: 'name',
+						data: 'nama',
 						className: 'fit-width',
 					},
-					{
-						data: 'nickname',
+                    {
+						data: 'tmp_tgl_lahir',
 						className: 'fit-width',
                     },
                     {
-						data: 'place_dob',
-						className: 'fit-width',
-                    },
-                    {
-						data: 'gender',
+						data: 'jenis_kelamin',
 						className: 'fit-width',
 					},
 					{
-						data: 'telephone',
+						data: 'telepon',
 						className: 'fit-width',
 					},
 					{
@@ -102,15 +98,11 @@ window.MASTER = (function ($) {
 						className: 'fit-width',
 					},
                     {
-						data: 'job_title',
+						data: 'jabatan',
 						className: 'fit-width',
-					}, 
+					},
 					{
-						data: 'company',
-						className: 'fit-width',
-                    },
-					{
-						data: 'address',
+						data: 'alamat',
 						className: 'fit-width',
 					}
 				],
@@ -146,7 +138,7 @@ window.MASTER = (function ($) {
 			});
 		},
 
-		// Trainees : handleDelete
+		// Karyawan : handleDelete
 		handleDelete: function () {
 			var parentThis = this;
 

@@ -14,7 +14,7 @@
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item">Home</li>
 						<li class="breadcrumb-item">Master</li>
-						<li class="breadcrumb-item"><a href="#">Peserta</a></li>
+						<li class="breadcrumb-item"><a href="#">Karyawan</a></li>
 					</ol>
 				</div>
 			</div>
@@ -43,13 +43,10 @@
 											<input class="check-all-master" type="checkbox">
 										</th>
 										<th class="fit-width">
-											NIP
+											NIK
 										</th>
 										<th class="fit-width">
-											Nama Peserta
-										</th>
-										<th class="fit-width">
-											Nama Panggilan
+											Nama Karyawan
 										</th>
 										<th class="fit-width">
 											Tempat, Tanggal Lahir
@@ -67,9 +64,6 @@
 											Jabatan
 										</th>
 										<th class="fit-width">
-											Perusahaan
-										</th>
-										<th class="fit-width">
 											Alamat
 										</th>
 									</tr>
@@ -78,20 +72,18 @@
 				
 						</div>
 
-						{% if check_roles('1') or check_roles('2') %}
 						<div class="card-footer">
 
-								<button class="btn btn-danger master-delete float-right" style="width: 10%;">
+								<button class="btn btn-danger master-delete" style="width: 10%;">
 									Hapus
 								</button>
 
-								<a class="btn btn-success master-edit float-right" 
-								href="{{ site_url('adm/trainees/edit/new') }}" style="width: 10%; margin-right:.5%">
+								<a class="btn btn-success master-edit" 
+								href="{{ site_url('adm/karyawan/edit/new') }}" style="width: 10%; margin-right:.5%">
 									Tambah
 								</a>
 
 						</div>
-						{% endif %}
 
 					</div>
 
@@ -119,7 +111,7 @@
 {{ parent() }}
 
 
-<script type="text/javascript" src="{{ assets_url('assets/js/app/master/trainees.js?') }}"></script>
+<script type="text/javascript" src="{{ assets_url('assets/js/app/master/karyawan.js?') }}"></script>
 
 <script type="text/javascript">
 	window.MASTER.handleVueMaster();
