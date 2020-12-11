@@ -107,7 +107,8 @@ window.MASTER = (function ($) {
 						className: 'fit-width'
 					},
 					{
-						render: renderEdit,
+						// render: renderEdit,
+						data: 'button_group',
 						className: 'fit-width'
 					}
 				],
@@ -116,7 +117,7 @@ window.MASTER = (function ($) {
 				deferRender: true,
 				scrollX: true,
 				"columnDefs": [{
-					"targets": [0,8],
+					"targets": [0,9],
 					"orderable": false,
 				}],
 				"language": {

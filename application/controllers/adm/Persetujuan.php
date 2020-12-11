@@ -35,13 +35,23 @@ class Persetujuan extends BaseController {
 			$no=1;
 			foreach($get_data as $get_row) {
 
+				$button_approve = '<a data-toggle="tooltip" data-placement="left" title="Terima" href="' .site_url('adm/persetujuan/save/approve/') .$get_row->pengajuan_id. '" class="btn btn-success btn-sm"><i class="far fa-check-circle"></i></a>';
+				$button_reject  = '<a data-toggle="tooltip" data-placement="left" title="Tolak" href="' .site_url('adm/persetujuan/save/reject/') .$get_row->pengajuan_id. '" class="btn btn-danger btn-sm"><i class="far fa-times-circle"></i></a>';
+				$button_hold    = '<a data-toggle="tooltip" data-placement="left" title="Batalkan" href="' .site_url('adm/persetujuan/save/hold/') .$get_row->pengajuan_id. '" class="btn btn-warning btn-sm"><i class="far far fa-clock"></i></a>';
+				$button_print   = '<a data-toggle="tooltip" data-placement="left" title="Cetak" href="' .site_url('adm/persetujuan/print_out/') .$get_row->pengajuan_id. '" class="btn btn-primary btn-sm"><i class="far fa-sticky-note"></i></a>';
+
 				$status = '<span class="badge badge-warning float-right"><i class="far fa-clock"></i> Menunggu Persetujuan</span>';
+				$button_group = '<div class="btn-group" role="group" aria-label="Basic example">'.$button_approve.$button_reject.$button_print.'</div>';
 				if($get_row->status == 1){
 					$status = '<span class="badge badge-success float-right"><i class="far fa-check-circle"></i> Disetujui</span>';
+					$button_group = '<div class="btn-group" role="group" aria-label="Basic example">'.$button_reject.$button_hold.$button_print.'</div>';
 				}
 				if($get_row->status == 2){
 					$status = '<span class="badge badge-danger float-right"><i class="far fa-times-circle"></i> Ditolak</span>';
+					$button_group = '<div class="btn-group" role="group" aria-label="Basic example">'.$button_approve.$button_hold.$button_print.'</div>';
 				}
+
+				
 
 				$data[] = array(
 					'no'                 => $no,
@@ -55,6 +65,7 @@ class Persetujuan extends BaseController {
 					'pekerjaan'          => $get_row->pekerjaan,
 					'keterangan'         => $get_row->keterangan,
 					'status'             => $status,
+					'button_group'		 => $button_group
 				);
 			$no++;
 			}
@@ -88,11 +99,21 @@ class Persetujuan extends BaseController {
 		// post
 		// $id     = $this->input->post('id');
 		// $nama   = $this->input->post('nama');
-		$action = 'save_close';
-		$status = ($uri == 'approve' ? '1' : '2');
+		$user_id = $this->session->userdata('user_id');
+		$action  = 'save_close';
+		$status  = 0;
+
+		if($uri == 'approve'){
+			$status = '1';
+		}
+
+		if($uri == 'reject'){
+			$status = '2';
+		}
 
 		$data_save = array(
-			'status' => $status
+			'status'           => $status,
+			'administrator_id' => $user_id
 		);
 
 		$convert = convert_button($action, $id);
