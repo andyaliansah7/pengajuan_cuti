@@ -15,6 +15,7 @@ class Persetujuan extends BaseController {
 		$this->auth->check_auth();
 
 		// load model
+		$this->load->model('Dashboard_model');
 		$this->load->model('Persetujuan_model');
 	}
 
@@ -149,19 +150,46 @@ class Persetujuan extends BaseController {
 		output_json($response);
 	}
 
-	public function check_id() {
-		$name  = $this->input->post('id');
-		$where = array('persetujuan_nama' => $name);
+	public function print_out($id) {
+		$data['content_title'] = 'Cetak';
 
-		$check = $this->Persetujuan_model->check_id($where);
+		$where    = array("pengajuan_id" => $id);
+		$get_data = $this->Persetujuan_model->get_data($where)->row_array();
 
-		if ($check) {
-			$response = array('status' => true);
-		} else {
-			$response = array('status' => false);
+		// Form Cuti
+		$rem_data = $this->Dashboard_model->check_approved($get_data['karyawan_id'])->row();
+		$jatah_cuti_pertahun  = $get_data['jatah_cuti_pertahun'];
+		$jumlah_cuti_terpakai = $rem_data->approved;
+		$jumlah_sisa_cuti     = ($jatah_cuti_pertahun - $jumlah_cuti_terpakai);
+
+		$data['karyawan_nama']    = $get_data['karyawan_nama'];
+		$data['karyawan_jabatan'] = $get_data['karyawan_jabatan'];
+		$data['masa_cuti']        = '<span class="bold">'.indonesia_day($get_data['dari_tanggal']).', '.indonesian_date($get_data['dari_tanggal']).'</span> s.d. <span class="bold">'.indonesia_day($get_data['sampai_tanggal']).', '.indonesian_date($get_data['sampai_tanggal'].'</span>');
+		$data['masuk_kembali']    = indonesia_day(date('Y-m-d', strtotime($get_data['sampai_tanggal'] . ' +1 day'))).', '.indonesian_date(date('Y-m-d', strtotime($get_data['sampai_tanggal'] . ' +1 day')));
+		$data['jenis_cuti']       = $get_data['jenis_cuti_nama'];
+		$data['sisa_cuti']        = $jumlah_sisa_cuti. ' Hari';
+
+		// Form Hand Over
+		$penugasan_telepon = $get_data['penugasan_telepon'];
+		$penugasan_email   = $get_data['penugasan_email'];
+		$kontak = $penugasan_telepon.' / '.$penugasan_email;
+		if($penugasan_email == ''){
+			$kontak = $penugasan_telepon;
+		}
+		if($penugasan_telepon == ''){
+			$kontak = $penugasan_email;
 		}
 
-		output_json($response);
+		$data['penugasan_nama']     = $get_data['penugasan_nama'];
+		$data['penugasan_jabatan']  = $get_data['penugasan_jabatan'];
+		$data['penugasan_kontak']   = $kontak;
+		$data['jenis_pekerjaan']    = $get_data['pekerjaan'].'<br>'.$get_data['keterangan'];
+
+
+
+		$data['administrator_nama'] = $get_data['administrator_nama'];
+
+		$this->twiggy_display('adm/persetujuan/print_out', $data);
 	}
 
 }
