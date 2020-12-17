@@ -45,6 +45,16 @@ class Dashboard_model extends Model {
 		return $this->db->query($sql);
 	}
 
+	public function check_approved_advance($id, $year)
+	{
+		$sql = "
+			SELECT COALESCE(SUM(DATEDIFF(sampai_tanggal, dari_tanggal)),0) as approved FROM `pengajuan`
+			where karyawan_id = '".$id."' and status = '1' and YEAR(timestamp) = '".$year."'
+		";
+
+		return $this->db->query($sql);
+	}
+
 }
 
 ?>
