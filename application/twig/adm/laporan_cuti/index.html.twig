@@ -1,0 +1,254 @@
+{% extends 'adm/layout.html.twig' %}
+{% block add_css %}
+{{ parent() }}
+<style type="text/css">
+	@media print {
+		@page {
+			size: a4 landscape;
+		}
+	}
+	
+	/* .wrap-header {} */
+
+	.wrap-footer {
+		page-break-inside: avoid;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="content-wrapper" id="vue-master">
+
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h4>{{ content_title }}</h4>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">Beranda</li>
+						<li class="breadcrumb-item">Laporan</li>
+						<li class="breadcrumb-item"><a href="#">Cuti</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<div class="card card-default">
+						<!-- <div class="card-header">
+							<h3 class="card-title">Data</h3>
+						</div> -->
+						<div class="card-body">
+
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Karyawan</label>
+										<select class="form-control select2 select-karyawan" tabindex="2">
+											<option value="">(Semua)</option>
+											{% if karyawan_data %}
+											{% for karyawan_row in karyawan_data %}
+												<option value="{{ karyawan_row.karyawan_id }}">{{ karyawan_row.nama_lengkap }}</option>
+											{% endfor %}
+											{% endif %}
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Dari Tanggal</label>
+											<input type="date" class="form-control fromdate" tabindex="3">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Sampai Tanggal</label>
+											<input type="date" class="form-control todate" tabindex="4">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Status</label>
+										<select class="form-control select2 select-status" tabindex="2">
+											<option value="">(Semua)</option>
+											<option value="0">Menunggu Persetujuan</option>
+											<option value="1">Disetujui</option>
+											<option value="2">Ditolak</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+
+
+							<button class="btn btn-info float-right" style="width: 10%; margin-left: .5%;" @click="getData()">
+								<i class="fas fa-sync-alt"></i> &nbsp; Proses
+							</button>
+
+							<div class="btn-group float-right" role="group" aria-label="Basic example" style="width: 30%;">
+								<button class="btn btn-success float-right" style="width: 100%;" id="button-print">
+									<i class="fas fa-print"></i> &nbsp; Print
+								</button>
+								<button class="btn btn-success float-right" style="width: 100%;" @click="exportExcel()">
+									<i class="far fa-file-excel"></i> &nbsp; Export Excel
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="card card-default">
+						<div class="card-body" id="master-content">
+
+							<div class="wrap-header">
+								<h2 align="left">Cuti</h2>
+
+							<table style="font-size: 12px;" v-if="detailData.length != 0">
+								<tr v-if="karyawan != '' && karyawan != '(Semua)'">
+									<td>Karyawan</td>
+									<td style="width: 3%;">:</td>
+									<td><% karyawan %></td>
+								</tr>
+								<tr v-if="fromdate != '' && fromdate != undefined">
+									<td>Tanggal</td>
+									<td style="width: 3%;">:</td>
+									<td><% fromdate %> - <% todate %></td>
+								</tr>
+								<tr v-if="status != '' && status != undefined">
+									<td>Status</td>
+									<td style="width: 3%;">:</td>
+									<td><% status %></td>
+								</tr>
+							</table>
+							<br/>
+							<table class="table table-bordered" style="font-size: 12px; width:100%;">
+								<thead>
+									<tr>
+										<th>
+											Nomor Pengajuan
+										</th>
+										<th>
+											Jenis
+										</th>
+										<th>
+											Tanggal
+										</th>
+										<th>
+											Karyawan
+										</th>
+										<th>
+											Penugasan
+										</th>
+										<th>
+											Pekerjaan
+										</th>
+										<th>
+											Keterangan
+										</th>
+										<th>
+											Status
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(row, detail_idx) in detailData">
+										<td>
+											<% row.nomor %>
+										</td>
+										<td>
+											<% row.jenis_cuti %>
+										</td>
+										<td>
+											<% row.tanggal %>
+										</td>
+										<td>
+											<% row.karyawan_nama %>
+										</td>
+										<td>
+											<% row.penugasan_nama %>
+										</td>
+										<td>
+											<% row.pekerjaan %>
+										</td>
+										<td>
+											<% row.keterangan %>
+										</td>
+										<td>
+											<% row.status %>
+										</td>
+									</tr>
+								</tbody>
+								<tbody v-if="detailData.length == 0">
+									<tr>
+										<td colspan="8">
+											Tidak ada data yang tersedia pada tabel ini
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+
+</div>
+
+{% endblock  %}
+
+{% block add_javascript %}
+{{ parent() }}
+
+<script type="text/javascript">
+	jQuery(function($) {
+
+    // Function available at https://gist.github.com/sixlive/55b9630cc105676f842c
+
+    $.fn.printDiv = function() {
+      var printContents = $(this).html();
+      var originalContents = $('body').html();
+      $('body').html(printContents);
+      $('body').addClass('js-print');
+      window.print();
+      $('body').html(originalContents);
+      $('body').removeClass('js-print');
+    };
+
+    // Print
+    $('#button-print').click(function() {
+      $('#master-content').printDiv();
+      setTimeout(function(){
+        window.close()
+        location.reload();
+      },10);
+    });
+
+  });
+</script>
+
+<script type="text/javascript" src="{{ assets_url('assets/js/app/laporan_cuti/index.js?') }}"></script>
+<script type="text/javascript">
+	window.REPORT.init();
+	window.DATETIME.initDatePicker();
+	window.INPUT.handleSelect2();
+</script>
+{% endblock  %}

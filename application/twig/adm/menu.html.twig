@@ -67,6 +67,20 @@
 							<p>Persetujuan</p>
 						</a>
 					</li>
+
+					<li class="nav-header">Laporan</li>
+					<li class="nav-item">
+						<a href="{{ site_url('adm/laporan_cuti') }}" class="nav-link {{ active_link('laporan_cuti') }}">
+							<i class="far fa-file-alt nav-icon"></i>
+							<p>Cuti</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ site_url('adm/laporan_sisa_cuti') }}" class="nav-link {{ active_link('laporan_sisa_cuti') }}">
+							<i class="far fa-file-alt nav-icon"></i>
+							<p>Sisa Cuti</p>
+						</a>
+					</li>
 					{% endif %}
   				</ul>
   			</nav>
