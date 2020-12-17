@@ -41,16 +41,18 @@ class Karyawan extends BaseController {
 				$date_fullformat = ($get_row->tempat_lahir != "" ? $get_row->tempat_lahir.", ".$date_format : $date_format);
 
 				$data[] = array(
-					'no'            => $no,
-					'id'            => $get_row->karyawan_id,
-					'nik'           => $get_row->nomor_induk,
-					'nama'          => $get_row->nama_lengkap,
-					'tmp_tgl_lahir' => $date_fullformat,
-					'jenis_kelamin' => $get_row->jenis_kelamin_nama,
-					'telepon'       => $get_row->telepon,
-					'email'         => $get_row->email,
-					'jabatan'       => $get_row->jabatan_nama,
-					'alamat'        => $get_row->alamat,
+					'no'                  => $no,
+					'id'                  => $get_row->karyawan_id,
+					'nik'                 => $get_row->nomor_induk,
+					'nama'                => $get_row->nama_lengkap,
+					'tmp_tgl_lahir'       => $date_fullformat,
+					'jenis_kelamin'       => $get_row->jenis_kelamin_nama,
+					'telepon'             => $get_row->telepon,
+					'email'               => $get_row->email,
+					'jabatan'             => $get_row->jabatan_nama,
+					'pendidikan'          => $get_row->pendidikan,
+					'jatah_cuti_pertahun' => $get_row->jatah_cuti_pertahun,
+					'alamat'              => $get_row->alamat,
 				);
 			$no++;
 			}

@@ -90,6 +90,10 @@ window.MASTER = (function ($) {
 						className: 'fit-width',
 					},
 					{
+						data: 'jabatan',
+						className: 'fit-width',
+					},
+					{
 						data: 'telepon',
 						className: 'fit-width',
 					},
@@ -97,8 +101,8 @@ window.MASTER = (function ($) {
 						data: 'email',
 						className: 'fit-width',
 					},
-                    {
-						data: 'jabatan',
+					{
+						data: 'pendidikan',
 						className: 'fit-width',
 					},
 					{
